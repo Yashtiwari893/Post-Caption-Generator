@@ -1,0 +1,335 @@
+/* Card-style image bubble for chat images (compact, no extra white border) */
+.bubble-image {
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.07);
+  width: 295px;
+  max-width: 98vw;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+.bubble-image-img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 1.25rem 1.25rem 0 0;
+  transition: transform 0.15s;
+  cursor: pointer;
+  display: block;
+}
+.bubble-image-caption-section {
+  padding: 0.7rem 1rem 1rem 1rem;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.caption {
+  font-size: 0.97em;
+  color: var(--muted-foreground, #6b7280);
+  margin-bottom: 0.1em;
+  word-break: break-word;
+  line-height: 1.4;
+}
+.hashtags {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.98em;
+  word-break: break-all;
+  margin-top: 0.1em;
+  letter-spacing: 0.01em;
+}
+.bubble-image-img:hover {
+  transform: scale(1.03);
+}
+.bubble-image-download-btn {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 0.10);
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--primary);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  z-index: 2;
+}
+.bubble-image-download-btn:hover {
+  background: var(--muted);
+  color: var(--accent);
+  transform: scale(1.12);
+}
+
+@media (max-width: 600px) {
+  .bubble-image {
+    width: 98vw;
+    min-width: 0;
+  }
+  .bubble-image-img {
+    height: 38vw;
+    min-height: 120px;
+    max-width: 98vw;
+  }
+}
+/* --- Custom styles for AI Image Generator image bubbles, modal, and buttons --- */
+
+.image-bubble {
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  border-radius: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+.image-bubble:hover {
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.10);
+}
+
+.image-thumb-card {
+  width: 250px;
+  height: 200px;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 0.10);
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+.image-thumb-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 0.15);
+}
+
+.download-btn {
+  align-items: left;
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--primary);
+  transition: background 0.15s, color 0.15s;
+  outline: none;
+}
+.download-btn:hover {
+  background: var(--muted);
+  color: var(--accent);
+}
+
+.caption-text {
+  font-size: 0.95em;
+  color: var(--muted-foreground);
+  margin-bottom: 0.25em;
+  word-break: break-word;
+}
+.hashtags {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 1em;
+  word-break: break-all;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s;
+}
+.modal-content {
+  background: var(--card);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 40px 0 rgb(0 0 0 / 0.25);
+  padding: 2rem 2rem 1.5rem 2rem;
+  max-width: 95vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.modal-img {
+  max-width: 80vw;
+  max-height: 60vh;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px 0 rgb(0 0 0 / 0.18);
+  object-fit: contain;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0,0,0,0.08);
+  border: none;
+  border-radius: 50%;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--primary);
+  transition: background 0.15s, color 0.15s;
+  z-index: 2;
+}
+.modal-close:hover {
+  background: var(--muted);
+  color: var(--accent);
+}
+.modal-caption {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .image-thumb-card {
+    width: 95vw;
+    height: 38vw;
+    min-height: 120px;
+    max-width: 98vw;
+  }
+  .modal-content {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    max-width: 99vw;
+  }
+  .modal-img {
+    max-width: 98vw;
+    max-height: 45vh;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0); /* #ffffff - clean white background */
+  --foreground: oklch(0.35 0.08 200); /* #164e63 - professional cyan-800 */
+  --card: oklch(0.98 0.02 200); /* #ecfeff - light cyan for message bubbles */
+  --card-foreground: oklch(0.35 0.08 200); /* #164e63 - text in cards */
+  --popover: oklch(1 0 0); /* #ffffff - clean popover background */
+  --popover-foreground: oklch(0.35 0.08 200); /* #164e63 - popover text */
+  --primary: oklch(0.35 0.08 200); /* #164e63 - primary brand color */
+  --primary-foreground: oklch(1 0 0); /* #ffffff - white text on primary */
+  --secondary: oklch(0.75 0.15 100); /* #84cc16 - bright green accent */
+  --secondary-foreground: oklch(1 0 0); /* #ffffff - white text on secondary */
+  --muted: oklch(0.97 0.01 120); /* #f0fdf4 - subtle green background */
+  --muted-foreground: oklch(0.45 0.02 220); /* #374151 - muted text */
+  --accent: oklch(0.75 0.15 100); /* #84cc16 - accent green for buttons */
+  --accent-foreground: oklch(1 0 0); /* #ffffff - white text on accent */
+  --destructive: oklch(0.6 0.2 25); /* #ff4d4d - error red */
+  --destructive-foreground: oklch(1 0 0); /* #ffffff - white text on destructive */
+  --border: oklch(0.85 0.01 220); /* #d1d5db - subtle borders */
+  --input: oklch(0.97 0.01 120); /* #f0fdf4 - input field background */
+  --ring: oklch(0.35 0.08 200 / 0.5); /* focus ring with transparency */
+  --chart-1: oklch(0.75 0.15 100); /* #84cc16 - chart colors */
+  --chart-2: oklch(0.6 0.15 260);
+  --chart-3: oklch(0.65 0.2 30);
+  --chart-4: oklch(0.6 0.2 10);
+  --chart-5: oklch(0.6 0.15 220);
+  --radius: 0.5rem; /* rounded corners */
+  --sidebar: oklch(0.97 0.01 120); /* #f0fdf4 - sidebar background */
+  --sidebar-foreground: oklch(0.35 0.08 200); /* #164e63 - sidebar text */
+  --sidebar-primary: oklch(1 0 0); /* #ffffff - primary sidebar background */
+  --sidebar-primary-foreground: oklch(0.35 0.08 200); /* #164e63 - primary sidebar text */
+  --sidebar-accent: oklch(0.75 0.15 100); /* #84cc16 - sidebar accents */
+  --sidebar-accent-foreground: oklch(1 0 0); /* #ffffff - sidebar accent text */
+  --sidebar-border: oklch(0.85 0.01 220); /* #d1d5db - sidebar borders */
+  --sidebar-ring: oklch(0.35 0.08 200 / 0.5); /* sidebar focus rings */
+}
+
+.dark {
+  --background: oklch(0.12 0.02 220); /* dark background */
+  --foreground: oklch(0.95 0.01 200); /* light text */
+  --card: oklch(0.15 0.02 220); /* dark cards */
+  --card-foreground: oklch(0.95 0.01 200); /* light card text */
+  --popover: oklch(0.12 0.02 220); /* dark popover */
+  --popover-foreground: oklch(0.95 0.01 200); /* light popover text */
+  --primary: oklch(0.75 0.15 100); /* bright green primary in dark mode */
+  --primary-foreground: oklch(0.12 0.02 220); /* dark text on primary */
+  --secondary: oklch(0.25 0.05 200); /* darker secondary */
+  --secondary-foreground: oklch(0.95 0.01 200); /* light text on secondary */
+  --muted: oklch(0.18 0.02 220); /* muted dark background */
+  --muted-foreground: oklch(0.65 0.02 220); /* muted light text */
+  --accent: oklch(0.75 0.15 100); /* bright green accent */
+  --accent-foreground: oklch(0.12 0.02 220); /* dark text on accent */
+  --destructive: oklch(0.5 0.2 25); /* darker red for errors */
+  --destructive-foreground: oklch(0.95 0.01 200); /* light text on destructive */
+  --border: oklch(0.25 0.02 220); /* dark borders */
+  --input: oklch(0.18 0.02 220); /* dark input background */
+  --ring: oklch(0.75 0.15 100 / 0.5); /* green focus ring */
+  --sidebar: oklch(0.15 0.02 220); /* dark sidebar */
+  --sidebar-foreground: oklch(0.95 0.01 200); /* light sidebar text */
+  --sidebar-primary: oklch(0.75 0.15 100); /* green sidebar primary */
+  --sidebar-primary-foreground: oklch(0.12 0.02 220); /* dark text on sidebar primary */
+  --sidebar-accent: oklch(0.25 0.05 200); /* dark sidebar accent */
+  --sidebar-accent-foreground: oklch(0.95 0.01 200); /* light sidebar accent text */
+  --sidebar-border: oklch(0.25 0.02 220); /* dark sidebar borders */
+  --sidebar-ring: oklch(0.75 0.15 100 / 0.5); /* green sidebar focus ring */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
